@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpaceInvadersGame", "SpaceInvadersGame\SpaceInvadersGame.vcxproj", "{E13D9565-F622-4903-83E2-25D1F3B7DF64}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Resources", "Resources\Resources.vcxproj", "{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{E13D9565-F622-4903-83E2-25D1F3B7DF64}.Release|x64.Build.0 = Release|x64
 		{E13D9565-F622-4903-83E2-25D1F3B7DF64}.Release|x86.ActiveCfg = Release|Win32
 		{E13D9565-F622-4903-83E2-25D1F3B7DF64}.Release|x86.Build.0 = Release|Win32
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Debug|x64.ActiveCfg = Debug|x64
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Debug|x64.Build.0 = Debug|x64
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Debug|x86.ActiveCfg = Debug|Win32
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Debug|x86.Build.0 = Debug|Win32
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Release|x64.ActiveCfg = Release|x64
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Release|x64.Build.0 = Release|x64
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Release|x86.ActiveCfg = Release|Win32
+		{4B1F9D91-C773-4DA0-90A6-95FEF5A7EFD8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
