@@ -4,15 +4,87 @@
     <Filter Include="Main">
       <UniqueIdentifier>{3f806adb-e845-47e5-a5d5-29fa5e5a3f50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{b2879222-85db-42ab-a8d6-c1361cd85a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{e6429cf5-c4cb-48e3-88bf-dc21e8dd9e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{179706ea-0de9-431c-a739-06a5653bf13a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{a2316456-d0e4-4b58-ae43-9c7bab8c8b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{adf81a49-23cc-490c-be7e-707c6d63fd53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{a67bc8aa-7eb3-42df-81b1-dc87614e04f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{04b5970f-f8de-492f-acd5-1871b7133f7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLevel_State.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu_State.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLevel_State.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu_State.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
