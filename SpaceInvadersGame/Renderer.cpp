@@ -2,14 +2,14 @@
 #include "SceneManager.h"
 #include "Character.h"
 
-void Renderer::Initialse(void)
+void Renderer::Initialse(const int backgroundAttributes)
 {
 	_stdOutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	GetConsoleScreenBufferInfo(_stdOutputHandle, &_consoleScreenBufferInfo);
 	_renderDataBuffer.resize(_consoleScreenBufferInfo.dwSize.X * _consoleScreenBufferInfo.dwSize.Y);
 	for (CHAR_INFO& itr : _renderDataBuffer)
 	{
-		itr.Attributes = BACKGROUND_RED;
+		itr.Attributes = backgroundAttributes;
 		itr.Char.AsciiChar = ' ';
 		itr.Char.UnicodeChar = ' ';
 	}
@@ -28,6 +28,15 @@ void Renderer::Render(void)
 	WriteConsoleOutput(_stdOutputHandle, _renderDataBuffer.data(), _consoleScreenBufferInfo.dwSize, firstCell, &_renderRegion);
 }
 
+void Renderer::ClearRenderBuffer()
+{
+	for (auto &itr : _renderDataBuffer)
+	{
+		itr.Char.AsciiChar = ' ';
+		itr.Char.UnicodeChar = ' ';
+		itr.Attributes = 0;
+	}
+}
 
 void Renderer::Update(SceneManager* sceneManager)
 {
@@ -88,12 +97,15 @@ void Renderer::Update(SceneManager* sceneManager)
 	}
 }
 
-void Renderer::ClearRenderBuffer()
+void Renderer::RenderText(const std::string text, const int Attributes, const Vector2D position)
 {
-	for (auto &itr : _renderDataBuffer)
+	COORD firstCell = { 0, 0 };
+	int height = position.y * _consoleScreenBufferInfo.dwSize.X;
+	for (int i = 0; i < text.length(); i++)
 	{
-		itr.Char.AsciiChar = ' ';
-		itr.Char.UnicodeChar = ' ';
-		itr.Attributes = 0;
+		_ASSERT_EXPR(text.length() < GetOverallBufferSize(), "RenderText overflow!\n"); //Should be an exception
+		_renderDataBuffer.at((height + position.x) + i).Char.AsciiChar = text.at(i);
+		_renderDataBuffer.at((height + position.x) + i).Attributes = Attributes;
 	}
 }
+

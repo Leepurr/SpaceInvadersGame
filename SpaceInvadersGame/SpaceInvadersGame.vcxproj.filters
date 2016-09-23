@@ -25,6 +25,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{04b5970f-f8de-492f-acd5-1871b7133f7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{ff29407a-48a9-4527-be44-2bac2090691e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

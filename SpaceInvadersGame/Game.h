@@ -14,11 +14,11 @@ private:
 	std::shared_ptr<MainMenu_State>		_MainMenu;
 public:
 	Game(void);
-	~Game(void) {};
+	~Game(void) = default;
 	void Start(void);
 	void Load(void);
 	void Update(void);
 	void Render(void);
 	GameStateManager* GetGameStateManager() { return _gameStateManager.get(); }
+	const bool isQuitRequested() const;
 };
-

@@ -48,6 +48,11 @@ const Vector2D Character::GetPosition() const
 	return _position;
 }
 
+const std::string Character::GetObjectName() const
+{
+	return _Name;
+}
+
 void Character::SetPosition(const Vector2D newPosition)
 {
 	_position = newPosition;

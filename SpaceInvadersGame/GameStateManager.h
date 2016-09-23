@@ -20,5 +20,7 @@ public:
 	void HandleEvents(void);
 	void Update(void);
 	void Render(void);
+	
+	const bool IsQuitRequestedByCurrentGameState() const;
 };
 

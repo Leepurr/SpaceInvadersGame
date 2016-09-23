@@ -26,10 +26,16 @@ void Game::Load(void)
 
 void Game::Update(void)
 {
-	GetGameStateManager()->Update();
+	_gameStateManager->HandleEvents();
+	_gameStateManager->Update();
 }
 
 void Game::Render(void)
 {
-	GetGameStateManager()->Render();
+	_gameStateManager->Render();
+}
+
+const bool Game::isQuitRequested() const
+{
+	return _gameStateManager->IsQuitRequestedByCurrentGameState();
 }

@@ -4,11 +4,8 @@
 
 class SceneManager;
 
-
 class GameState
 {
-private:
-	Renderer _renderer;
 public:
 	explicit GameState(std::shared_ptr<SceneManager>) {};
 	virtual ~GameState(void) = default;
@@ -19,4 +16,5 @@ public:
 	virtual void HandleEvents(void) = 0;
 	virtual void Update(void) = 0;
 	virtual void Render(void) = 0;
+	virtual const bool IsQuitRequested(void) const = 0;
 };

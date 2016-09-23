@@ -19,6 +19,7 @@ public:
 	virtual const Etype GetObjectType() const;
 	virtual const std::string GetObjectID();
 	virtual const Vector2D GetPosition() const;
-	virtual void SetPosition(const Vector2D newPosition);
+	virtual const std::string GetObjectName() const;
 	virtual const Vector2D GetSize() const;
+	virtual void SetPosition(const Vector2D newPosition);
 };

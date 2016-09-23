@@ -64,3 +64,8 @@ void GameStateManager::Render(void)
 {
 	_states.back()->Render();
 }
+
+const bool GameStateManager::IsQuitRequestedByCurrentGameState() const
+{
+	return _states.back()->IsQuitRequested();
+}
