@@ -22,7 +22,7 @@ int wmain(int argc, wchar_t* argv[])
 {
 	isRunning = false;
 	secondsPassed, SecondsPerTick = 0;
-	if (Startup(160, 50))
+	if (Startup(80, 25))
 	{
 		g_Game.Start();
 		//TODO: Load scoreboard
@@ -127,16 +127,32 @@ inline bool Startup(const int cols, const int rows)
 	g_consoleScreenBufferRect.Top = 0;										//The y-coordinate of the upper left corner of the rectangle.
 	g_consoleScreenBufferRect.Right = (g_consoleScreenBufferSize.X - 1);	//The x-coordinate of the lower right corner of the rectangle.
 	g_consoleScreenBufferRect.Bottom = (g_consoleScreenBufferSize.Y - 1);	//The y-coordinate of the lower right corner of the rectangle.
+	unsigned int SetBufferAttempt = 0;
+	bool failedSettingBuffer = false;
+RETRYSETTINGBUFFER:
 	if (SetConsoleScreenBufferSize(g_stdOutputHandle, g_consoleScreenBufferSize) == 0)
 	{
+		failedSettingBuffer = true;
 		status = false;
 		std::cout << "Failed to set new screen buffer size. " << GetLastError() << std::endl;
+	}
+	else
+	{
+		std::cout << "Re-attempt to set Screen Buffer Size after window resize was sucessful!\n";
+		failedSettingBuffer = false;
+		status = true;
 	}
 
 	if (SetConsoleWindowInfo(g_stdOutputHandle, TRUE, &g_consoleScreenBufferRect) == 0)
 	{
 		status = false;
 		std::cout << "Failed to set new window size." << GetLastError() << std::endl;
+	}
+
+	SetBufferAttempt++;
+	if (failedSettingBuffer &&(SetBufferAttempt <= 1))
+	{
+		goto RETRYSETTINGBUFFER;
 	}
 	if (!SetConsoleActiveScreenBuffer(g_stdOutputHandle))
 	{
