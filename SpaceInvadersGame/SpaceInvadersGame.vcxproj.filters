@@ -28,6 +28,12 @@
     <Filter Include="Input">
       <UniqueIdentifier>{ff29407a-48a9-4527-be44-2bac2090691e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Datatypes">
+      <UniqueIdentifier>{eb6accea-8d1c-4f90-98d3-1b90920758fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event System">
+      <UniqueIdentifier>{d41a7950-9fb7-405a-a95e-963f59e68234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Datatypes.h">
+      <Filter>Datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

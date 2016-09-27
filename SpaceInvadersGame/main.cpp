@@ -1,6 +1,7 @@
 #pragma once
 #include "main.h"
 #include <iostream>
+#include "Datatypes.h"
 
 long long milliseconds_now()
 {

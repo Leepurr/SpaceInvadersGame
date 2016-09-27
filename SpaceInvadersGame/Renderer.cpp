@@ -104,8 +104,8 @@ void Renderer::RenderText(const std::string text, const int Attributes, const Ve
 	for (int i = 0; i < text.length(); i++)
 	{
 		_ASSERT_EXPR(text.length() < GetOverallBufferSize(), "RenderText overflow!\n"); //Should be an exception
-		_renderDataBuffer.at((height + position.x) + i).Char.AsciiChar = text.at(i);
-		_renderDataBuffer.at((height + position.x) + i).Attributes = Attributes;
+		_renderDataBuffer.at((height + (position.x - (text.length()/2))) + i).Char.AsciiChar = text.at(i);
+		_renderDataBuffer.at((height + (position.x - (text.length() / 2))) + i).Attributes = Attributes;
 	}
 }
 
