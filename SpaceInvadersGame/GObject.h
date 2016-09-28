@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <vector>
 
+template<class Type>
 class Vector2D;
 
 enum class Etype
@@ -20,8 +21,8 @@ public:
 	virtual void Load() = 0;
 	virtual const Etype GetObjectType() const = 0;
 	virtual const std::string GetObjectID() = 0;
-	virtual const Vector2D GetPosition() const = 0;
+	virtual const Vector2D<int> GetPosition() const = 0;
 	virtual const std::string GetObjectName() const = 0;
-	virtual const Vector2D GetSize() const = 0;
-	virtual void SetPosition(const Vector2D newPosition) = 0;
+	virtual const Vector2D<int> GetSize() const = 0;
+	virtual void SetPosition(const Vector2D<int> newPosition) = 0;
 };

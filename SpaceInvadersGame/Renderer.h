@@ -23,6 +23,6 @@ public:
 	void Update(SceneManager* sceneManager);
 	const size_t GetOverallBufferSize() const { return _renderDataBuffer.size(); }
 	const COORD GetRenderBufferSize() const { return _consoleScreenBufferInfo.dwSize; };
-	void RenderText(const std::string text, const int Attributes, const Vector2D position);
+	void RenderText(const std::string text, const int Attributes, const Vector2D<int> position);
 };
 

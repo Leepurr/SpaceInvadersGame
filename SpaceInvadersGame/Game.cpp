@@ -20,7 +20,7 @@ void Game::Start(void)
 
 void Game::Load(void)
 {
- 	_gameStateManager->PushState(std::move(_GameLevel));
+	_gameStateManager->PushState(std::move(_GameLevel));
 	_gameStateManager->PushState(std::move(_MainMenu));
 }
 

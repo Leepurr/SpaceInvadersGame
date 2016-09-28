@@ -95,7 +95,7 @@ void MainMenu_State::Update(void)
 	//p_renderer->Update(p_sceneManager.get());
 	if (sg_drawScreen)
 	{
-		Vector2D Position = { p_renderer->GetRenderBufferSize().X / 2, (p_renderer->GetRenderBufferSize().Y / 2) - 5 };
+		Vector2D<int> Position(p_renderer->GetRenderBufferSize().X / 2, (p_renderer->GetRenderBufferSize().Y / 2) - 5);
 		if (_menuItems == MenuItems::Play)
 		{
 			p_renderer->RenderText("Play", currentMenuItemAttribute, Position);
@@ -104,7 +104,7 @@ void MainMenu_State::Update(void)
 		{
 			p_renderer->RenderText("Play", generalMenuItemAttribute, Position);
 		}
-		Position.y += 2;
+		Position.PlusEqualsY(2);
 		if (_menuItems == MenuItems::Options)
 		{
 			p_renderer->RenderText("Options", currentMenuItemAttribute, Position);
@@ -113,7 +113,7 @@ void MainMenu_State::Update(void)
 		{
 			p_renderer->RenderText("Options", generalMenuItemAttribute, Position);
 		}
-		Position.y += 2;
+		Position.PlusEqualsY(2);
 		if (_menuItems == MenuItems::Leaderboard)
 		{
 			p_renderer->RenderText("Leaderboard", currentMenuItemAttribute, Position);
@@ -122,7 +122,7 @@ void MainMenu_State::Update(void)
 		{
 			p_renderer->RenderText("Leaderboard", generalMenuItemAttribute, Position);
 		}
-		Position.y += 2;
+		Position.PlusEqualsY(2);
 		if (_menuItems == MenuItems::Exit)
 		{
 			p_renderer->RenderText("Exit", currentMenuItemAttribute, Position);
