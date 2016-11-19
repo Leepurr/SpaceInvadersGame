@@ -63,6 +63,9 @@
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -105,6 +108,9 @@
       <Filter>Datatypes</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
       <Filter>Event System</Filter>
     </ClInclude>
   </ItemGroup>

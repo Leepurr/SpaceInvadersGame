@@ -7,7 +7,7 @@ class SceneManager;
 class GameState
 {
 public:
-	explicit GameState(std::shared_ptr<SceneManager>) {};
+	explicit GameState() = default;
 	virtual ~GameState(void) = default;
 	virtual void Initialise(void) = 0;
 	virtual void Cleanup(void) = 0;

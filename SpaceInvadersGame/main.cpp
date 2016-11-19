@@ -23,7 +23,7 @@ int wmain(int argc, wchar_t* argv[])
 {
 	isRunning = false;
 	secondsPassed, SecondsPerTick = 0;
-	if (Startup(80, 25))
+	if (Startup(160, 50))
 	{
 		g_Game.Start();
 		//TODO: Load scoreboard

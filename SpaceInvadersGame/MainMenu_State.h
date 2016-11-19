@@ -3,26 +3,31 @@
 #include "GameState.h"
 #include "Renderer.h"
 #include "Input.h"
+#include "Event.h"
 
 class SceneManager;
+class GameStateManager;
 
 class MainMenu_State : public GameState
 {
 private:
-	bool quitRequested;
+	int currentMenuItemAttribute; int generalMenuItemAttribute;
 	std::unique_ptr<Renderer> p_renderer;
 	std::shared_ptr<SceneManager> p_sceneManager;
-	int currentMenuItemAttribute; int generalMenuItemAttribute;
+	std::shared_ptr<GameStateManager> p_GameStateManager;
+	bool quitRequested;
 	enum class MenuItems
 	{
 		Play = 0,
-		Options,
+		Options,  
 		Leaderboard,
 		Exit
 	} _menuItems;
 	Input _input;
+	void EventHandle(const Event &events);
 public:
-	MainMenu_State(std::shared_ptr<SceneManager>);
+	explicit MainMenu_State(std::shared_ptr<SceneManager> sceneManager,
+				   std::shared_ptr<GameStateManager> gameStateManager);
 	virtual ~MainMenu_State(void) = default;
 	virtual void Initialise(void);
 	virtual void Cleanup(void);
@@ -32,4 +37,5 @@ public:
 	virtual void Update(void);
 	virtual void Render(void);
 	virtual const bool IsQuitRequested(void) const;
+
 };

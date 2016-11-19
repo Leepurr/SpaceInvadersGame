@@ -2,8 +2,11 @@
 #include "SceneManager.h"
 #include "Character.h"
 
+
+static bool sg_drawScreen = true;
+
 GameLevel_State::GameLevel_State(std::shared_ptr<SceneManager> sceneManager) :
-GameState(sceneManager), p_sceneManager(sceneManager), p_renderer(new Renderer),
+p_sceneManager(sceneManager), p_renderer(new Renderer),
 quitRequested(false)
 {}
 
@@ -22,10 +25,12 @@ void GameLevel_State::Cleanup(void)
 
 void GameLevel_State::Resume(void)
 {
+	sg_drawScreen = true;
 }
 
 void GameLevel_State::Pause(void)
 {
+	sg_drawScreen = false;
 }
 
 void GameLevel_State::HandleEvents(void)
@@ -44,7 +49,10 @@ void GameLevel_State::Update(void)
 
 void GameLevel_State::Render(void)
 {
-	p_renderer->Render();
+	if (sg_drawScreen)
+	{
+		p_renderer->Render();
+	}
 }
 
 const bool GameLevel_State::IsQuitRequested(void) const

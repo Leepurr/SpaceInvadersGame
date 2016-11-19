@@ -14,6 +14,7 @@ public:
 	void Cleanup(void);
 
 	void ChangeState(std::shared_ptr<GameState> state);
+	void NextState();
 	void PushState(std::shared_ptr<GameState>&& state);
 	void PopState(void);
 

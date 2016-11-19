@@ -1,12 +1,14 @@
 #include "MainMenu_State.h"
 #include "SceneManager.h"
 #include "Character.h"
+#include "GameStateManager.h"
 
 
 static bool sg_drawScreen = true;
 
-MainMenu_State::MainMenu_State(std::shared_ptr<SceneManager> sceneManager) :
-GameState(sceneManager), p_sceneManager(sceneManager), p_renderer(new Renderer),
+MainMenu_State::MainMenu_State(std::shared_ptr<SceneManager> sceneManager, 
+							   std::shared_ptr<GameStateManager> gameStateManager) :
+p_sceneManager(sceneManager), p_GameStateManager(gameStateManager), p_renderer(new Renderer),
 currentMenuItemAttribute(0), generalMenuItemAttribute(0) , _menuItems(MenuItems::Play),
 quitRequested(false)
 {}
@@ -24,10 +26,12 @@ void MainMenu_State::Cleanup(void)
 
 void MainMenu_State::Resume(void)
 {
+	sg_drawScreen = true;
 }
 
 void MainMenu_State::Pause(void)
 {
+	sg_drawScreen = false;
 }
 
 void MainMenu_State::HandleEvents(void)
@@ -75,7 +79,10 @@ void MainMenu_State::HandleEvents(void)
 		switch (_menuItems)
 		{
 		case MenuItems::Play:
-
+			if (p_GameStateManager != nullptr)
+			{
+				p_GameStateManager->NextState();
+			}
 			break;
 		case MenuItems::Options:
 			
