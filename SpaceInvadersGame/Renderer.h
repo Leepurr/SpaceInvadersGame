@@ -1,4 +1,5 @@
 #pragma once
+#include "Vector.h"
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <vector>
@@ -17,10 +18,11 @@ private:
 public:
 	Renderer(void) = default;
 	~Renderer(void) = default;
-	void Initialse(void);
+	void Initialse(const int backgroundAttributes);
 	void Render(void);
 	void Update(SceneManager* sceneManager);
 	const size_t GetOverallBufferSize() const { return _renderDataBuffer.size(); }
 	const COORD GetRenderBufferSize() const { return _consoleScreenBufferInfo.dwSize; };
+	void RenderText(const std::string text, const int Attributes, const Vector2D<int> position);
 };
 

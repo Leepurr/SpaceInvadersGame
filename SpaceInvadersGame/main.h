@@ -2,24 +2,33 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <vector>
+#include <string>
 #include <memory>
 #include "Game.h"
 
-
-HANDLE stdInputHandle;
-HANDLE stdOutputHandle;
-HANDLE stdErrorHandle;
-HWND ConsoleWindow;
-int screenWidth;
-int screenHeight;
-//HANDLE consoleScreenBuffer;
-SMALL_RECT consoleScreenBufferRect;
-COORD consoleScreenBufferSize;
-std::vector<CHAR_INFO> lpBuffer;
-CONSOLE_SCREEN_BUFFER_INFOEX consoleScreenBufferInfoEx;
-CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
+HANDLE g_stdInputHandle;
+HANDLE g_stdOutputHandle;
+HANDLE g_stdErrorHandle;
+HWND g_consoleWindow;
+HWND g_desktopScreen;
+int g_screenWidth;
+int g_screenHeight;
+SMALL_RECT g_consoleScreenBufferRect;
+RECT g_consoleWindowSizeRect;
+RECT g_desktopResolutionRect;
+COORD g_consoleScreenBufferSize;
+std::vector<CHAR_INFO> g_lpBuffer;
+CONSOLE_CURSOR_INFO g_consoleCursorInfo;
+CONSOLE_SCREEN_BUFFER_INFO g_consoleScreenBufferInfo;
 Game g_Game;
+bool isRunning;
+LARGE_INTEGER Frequency, Tick, Tock;
+double secondsPassed, SecondsPerTick;
+std::string timePassed;
 
-inline void Startup();
+BOOL CtrlHandler(DWORD fdwCtrlType);
+inline bool Startup(const int cols, const int rows);
+
+//Debug methods
 void Render();
-void Update();
+void RenderDebugText(std::string text, int Attributes, int position);

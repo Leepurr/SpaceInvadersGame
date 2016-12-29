@@ -2,14 +2,14 @@
 #include "SceneManager.h"
 #include "Character.h"
 
-void Renderer::Initialse(void)
+void Renderer::Initialse(const int backgroundAttributes)
 {
 	_stdOutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	GetConsoleScreenBufferInfo(_stdOutputHandle, &_consoleScreenBufferInfo);
 	_renderDataBuffer.resize(_consoleScreenBufferInfo.dwSize.X * _consoleScreenBufferInfo.dwSize.Y);
 	for (CHAR_INFO& itr : _renderDataBuffer)
 	{
-		itr.Attributes = BACKGROUND_RED;
+		itr.Attributes = backgroundAttributes;
 		itr.Char.AsciiChar = ' ';
 		itr.Char.UnicodeChar = ' ';
 	}
@@ -28,6 +28,15 @@ void Renderer::Render(void)
 	WriteConsoleOutput(_stdOutputHandle, _renderDataBuffer.data(), _consoleScreenBufferInfo.dwSize, firstCell, &_renderRegion);
 }
 
+void Renderer::ClearRenderBuffer()
+{
+	for (auto &itr : _renderDataBuffer)
+	{
+		itr.Char.AsciiChar = ' ';
+		itr.Char.UnicodeChar = ' ';
+		itr.Attributes = 0;
+	}
+}
 
 void Renderer::Update(SceneManager* sceneManager)
 {
@@ -39,38 +48,38 @@ void Renderer::Update(SceneManager* sceneManager)
 		{
 			for (auto &objItr : sceneManager->GetGObjects())
 			{
-				int positionX = (((objItr.get()->GetPosition().x - 1) * _consoleScreenBufferInfo.dwSize.X));
+				int positionX = (((objItr.get()->GetPosition().GetX() - 1) * _consoleScreenBufferInfo.dwSize.X));
 				int finalXPosition = positionX;
 				globalCounter = 0;
 				switch (objItr.get()->GetObjectType())
 				{
 				case Etype::Player:
-					for (render_X = 0; render_X < objItr.get()->GetSize().x; render_X++)
+					for (render_X = 0; render_X < objItr.get()->GetSize().GetX(); render_X++)
 					{
 						finalXPosition = positionX + (render_X * _consoleScreenBufferInfo.dwSize.X);
-						for (render_Y = 0; render_Y < objItr.get()->GetSize().y; render_Y++)
+						for (render_Y = 0; render_Y < objItr.get()->GetSize().GetY(); render_Y++)
 						{
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Char.AsciiChar = objItr.get()->GetRenderData().at(globalCounter).Char.AsciiChar;
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Char.UnicodeChar = objItr.get()->GetRenderData().at(globalCounter).Char.UnicodeChar;
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Attributes = objItr.get()->GetRenderData().at(globalCounter).Attributes;
 							globalCounter++;
 						}
 					}
 					break;
 				case Etype::Standard:
-					for (render_X = 0; render_X < objItr.get()->GetSize().x; render_X++)
+					for (render_X = 0; render_X < objItr.get()->GetSize().GetX(); render_X++)
 					{
 						finalXPosition = positionX + (render_X * _consoleScreenBufferInfo.dwSize.X);
-						for (render_Y = 0; render_Y < objItr.get()->GetSize().y; render_Y++)
+						for (render_Y = 0; render_Y < objItr.get()->GetSize().GetY(); render_Y++)
 						{
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Char.AsciiChar = objItr.get()->GetRenderData().at(globalCounter).Char.AsciiChar;
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Char.UnicodeChar = objItr.get()->GetRenderData().at(globalCounter).Char.UnicodeChar;
-							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().y) + render_Y)
+							_renderDataBuffer.at((finalXPosition + objItr.get()->GetPosition().GetY()) + render_Y)
 								.Attributes = objItr.get()->GetRenderData().at(globalCounter).Attributes;
 							globalCounter++;
 						}
@@ -88,12 +97,15 @@ void Renderer::Update(SceneManager* sceneManager)
 	}
 }
 
-void Renderer::ClearRenderBuffer()
+void Renderer::RenderText(const std::string text, const int Attributes, const Vector2D<int> position)
 {
-	for (auto &itr : _renderDataBuffer)
+	COORD firstCell = { 0, 0 };
+	int height = position.GetY() * _consoleScreenBufferInfo.dwSize.X;
+	for (unsigned int i = 0; i < text.length(); i++)
 	{
-		itr.Char.AsciiChar = ' ';
-		itr.Char.UnicodeChar = ' ';
-		itr.Attributes = 0;
+		_ASSERT_EXPR(text.length() < GetOverallBufferSize(), "RenderText overflow!\n"); //Should be an exception
+		_renderDataBuffer.at((height + (position.GetX() - (text.length()/2))) + i).Char.AsciiChar = text.at(i);
+		_renderDataBuffer.at((height + (position.GetX() - (text.length() / 2))) + i).Attributes = Attributes;
 	}
 }
+

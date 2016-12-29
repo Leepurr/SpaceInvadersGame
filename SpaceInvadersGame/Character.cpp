@@ -30,7 +30,7 @@ void Character::Load()
 			chRenderData.push_back(temp);
 		}
 	}
-	_position.x = 60; _position.y = 20;
+	_position.SetVector2D(60, 20);
 }
 
 const Etype Character::GetObjectType() const
@@ -43,17 +43,22 @@ const std::string Character::GetObjectID()
 	return _ID;
 }
 
-const Vector2D Character::GetPosition() const
+const Vector2D<int> Character::GetPosition() const
 {
-	return _position;
+	return _position.GetVector();
 }
 
-void Character::SetPosition(const Vector2D newPosition)
+const std::string Character::GetObjectName() const
+{
+	return _Name;
+}
+
+void Character::SetPosition(const Vector2D<int> newPosition)
 {
 	_position = newPosition;
 }
 
-const Vector2D Character::GetSize() const
+const Vector2D<int> Character::GetSize() const
 {
-	return Vector2D(m_height, m_width);
+	return Vector2D<int>(m_height, m_width);
 }

@@ -28,6 +28,17 @@ void GameStateManager::ChangeState(std::shared_ptr<GameState> state)
 	}
 }
 
+void GameStateManager::NextState()
+{
+	if (!_states.empty())
+	{
+		_states.back()->Pause();
+	}
+	//_states.front()->Initialise();
+	_states.front()->Resume();
+	
+}
+
 void GameStateManager::PushState(std::shared_ptr<GameState>&& state)
 {
 	if (!_states.empty())
@@ -63,4 +74,9 @@ void GameStateManager::Update(void)
 void GameStateManager::Render(void)
 {
 	_states.back()->Render();
+}
+
+const bool GameStateManager::IsQuitRequestedByCurrentGameState() const
+{
+	return _states.back()->IsQuitRequested();
 }

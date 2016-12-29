@@ -19,7 +19,7 @@ SceneManager::~SceneManager()
 	_isConstructed = false;
 }
 
-bool SceneManager::AddEntity(std::shared_ptr<GObject> object)
+const bool SceneManager::AddEntity(std::shared_ptr<GObject> object)
 {
 	try
 	{
@@ -36,7 +36,7 @@ bool SceneManager::AddEntity(std::shared_ptr<GObject> object)
 	return false;
 }
 
-bool SceneManager::DeleteEntity(std::shared_ptr<GObject> object)
+const bool SceneManager::DeleteEntity(std::shared_ptr<GObject> object)
 {
 	try
 	{
@@ -56,7 +56,35 @@ bool SceneManager::DeleteEntity(std::shared_ptr<GObject> object)
 	return false;
 }
 
-GObject* SceneManager::GetGObjectByID(const std::string GObjectID) const
+const bool SceneManager::DeleteEntityByName(std::string objectName)
+{
+	try
+	{
+		if (!_gameObjects.empty())
+		{
+			std::vector<std::shared_ptr<GObject>>::const_iterator itr;
+			int i = 0;
+			for (itr = _gameObjects.begin(); itr != _gameObjects.end(); itr++)
+			{
+				//const std::string compareString = GObjectName;
+				const std::string name = itr->get()->GetObjectName();
+				if (name == objectName)
+				{
+					_gameObjects.erase(itr);
+					return true;
+				}
+				i++;
+			}
+		}
+	}
+	catch (std::exception e)
+	{
+		std::exception("An exception occured whilst trying to delete an entity!\n");
+	}
+	return false;
+}
+
+const GObject* SceneManager::GetGObjectByID(const std::string GObjectID) const
 {
 	if (!_gameObjects.empty())
 	{
@@ -69,6 +97,26 @@ GObject* SceneManager::GetGObjectByID(const std::string GObjectID) const
 			{
 				return itr->get();
 			}
+		}
+	}
+	return nullptr;
+}
+
+const std::shared_ptr<GObject>& SceneManager::GetObjectByName(const std::string GObjectName) const
+{
+	if (!_gameObjects.empty())
+	{
+		std::vector<std::shared_ptr<GObject>>::const_iterator itr;
+		int i = 0;
+		for (itr = _gameObjects.begin(); itr != _gameObjects.end(); itr++)
+		{
+			//const std::string compareString = GObjectName;
+			const std::string name = itr->get()->GetObjectName();
+			if (name == GObjectName)
+			{
+				return _gameObjects.at(i);
+			}
+			i++;
 		}
 	}
 	return nullptr;
