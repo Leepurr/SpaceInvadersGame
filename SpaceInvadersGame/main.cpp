@@ -55,12 +55,13 @@ inline void Startup()
 		std::cout << "Error: " << GetLastError() << std::endl;
 	}
 	stdOutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	consoleScreenBufferSize.X = 160;
-	consoleScreenBufferSize.Y = 50;
+	consoleScreenBufferSize.X = 80;
+	consoleScreenBufferSize.Y = 25;
 	consoleScreenBufferRect.Left = 0;							//The x-coordinate of the upper left corner of the rectangle.
 	consoleScreenBufferRect.Top = 0;							//The y-coordinate of the upper left corner of the rectangle.
 	consoleScreenBufferRect.Right = (consoleScreenBufferSize.X - 1);  //The x-coordinate of the lower right corner of the rectangle.
 	consoleScreenBufferRect.Bottom = (consoleScreenBufferSize.Y - 1); //The y-coordinate of the lower right corner of the rectangle.
+	RetryConsoleBuffer:
 	if (SetConsoleScreenBufferSize(stdOutputHandle, consoleScreenBufferSize) == 0)
 	{
 		std::cout << "Failed to set new screen buffer size. " << GetLastError() << std::endl;
@@ -69,6 +70,7 @@ inline void Startup()
 	//SetConsoleScreenBufferInfoEx()
 	if (SetConsoleWindowInfo(stdOutputHandle, TRUE, &consoleScreenBufferRect) == 0)
 	{
+		goto RetryConsoleBuffer;
 		std::cout << "Failed to set new window size." << GetLastError() << std::endl;
 	}
 	if (!SetConsoleActiveScreenBuffer(stdOutputHandle))
